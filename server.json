@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.szhuangzan/rofilter-mcp",
+  "title": "ROFilter - Reverse Osmosis Design",
+  "description": "Design RO membrane systems: feed pressure, permeate TDS, energy use, flux and per-stage results.",
+  "version": "1.0.43",
+  "websiteUrl": "https://rofilter.cn",
+  "repository": {
+    "url": "https://github.com/szhuangzan/rofilter-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://rofilter.cn/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer token generated at https://rofilter.cn (MCP service panel). Format: 'Bearer rfmcp_xxx'.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
