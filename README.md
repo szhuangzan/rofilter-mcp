@@ -28,7 +28,11 @@ The MCP server returns structured results from the production engine, identical 
 
 Endpoint: `https://rofilter.cn/mcp` (Streamable HTTP, JSON-RPC 2.0)
 
-A token is required. Create one at [rofilter.cn](https://rofilter.cn) → **MCP service** panel in the top bar (free account, self-service). The token looks like `rfmcp_xxxxxxxx` and is shown in full only once.
+A token is required. A **shared trial token** is pre-filled in the examples below: 1,000 calculations per day in total, shared by all users, reset daily — good enough to try the server right away.
+
+For your own independent quota, create a free account at [rofilter.cn](https://rofilter.cn) → **MCP service** panel in the top bar (self-service, instant).
+
+> The trial token may be rotated or revoked at any time. If it stops working, generate a personal token with the steps above.
 
 ### Claude Desktop / Claude Code
 
@@ -39,7 +43,7 @@ A token is required. Create one at [rofilter.cn](https://rofilter.cn) → **MCP 
       "type": "http",
       "url": "https://rofilter.cn/mcp",
       "headers": {
-        "Authorization": "Bearer rfmcp_your_token"
+        "Authorization": "Bearer rfmcp_1603bb7f5749b0f01f2828ecb43fa1662a8ee8a9"
       }
     }
   }
@@ -56,7 +60,7 @@ A token is required. Create one at [rofilter.cn](https://rofilter.cn) → **MCP 
     "rofilter": {
       "url": "https://rofilter.cn/mcp",
       "headers": {
-        "Authorization": "Bearer rfmcp_your_token"
+        "Authorization": "Bearer rfmcp_1603bb7f5749b0f01f2828ecb43fa1662a8ee8a9"
       }
     }
   }
@@ -71,7 +75,7 @@ from mcp.client.streamable_http import streamablehttp_client
 
 async with streamablehttp_client(
     "https://rofilter.cn/mcp",
-    headers={"Authorization": "Bearer rfmcp_your_token"},
+    headers={"Authorization": "Bearer rfmcp_1603bb7f5749b0f01f2828ecb43fa1662a8ee8a9"},
 ) as (read, write, _):
     async with ClientSession(read, write) as session:
         await session.initialize()
