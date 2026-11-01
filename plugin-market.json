@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "title": {
+    "en": "ROFilter Plugins",
+    "zh": "ROFilter 插件"
+  },
+  "metadata": {
+    "categories": {
+      "engineering": {
+        "title": {
+          "en": "Engineering",
+          "zh": "工程计算"
+        }
+      }
+    },
+    "labels": {
+      "water": {
+        "title": {
+          "en": "Water treatment",
+          "zh": "水处理"
+        }
+      }
+    }
+  },
+  "plugins": [
+    {
+      "name": "rofilter",
+      "title": {
+        "en": "ROFilter",
+        "zh": "ROFilter 反渗透设计"
+      },
+      "description": {
+        "en": "Reverse osmosis membrane system design: element library, feed-water analysis, feed pressure, permeate TDS, energy and per-stage flux.",
+        "zh": "反渗透膜系统设计：膜元件库、进水水质分析、进水压力、产水 TDS、能耗与逐段通量。"
+      },
+      "author": "rofilter.cn",
+      "homepage": "https://rofilter.cn",
+      "repository": {
+        "url": "https://github.com/szhuangzan/rofilter-mcp"
+      },
+      "icon": "https://rofilter.cn/favicon.svg",
+      "metadata": {
+        "category": "engineering",
+        "keywords": [
+          "reverse osmosis",
+          "membrane",
+          "water treatment",
+          "desalination",
+          "ro design",
+          "反渗透",
+          "膜法水处理"
+        ],
+        "labels": [
+          "water"
+        ]
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1793491200,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/szhuangzan/rofilter-mcp.git",
+            "commit": "075472f82136f95097084e29f3d29153c876a146"
+          }
+        }
+      ]
+    }
+  ]
+}
