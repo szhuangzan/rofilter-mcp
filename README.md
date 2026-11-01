@@ -5,6 +5,7 @@
 [![MCP Registry](https://img.shields.io/badge/MCP%20Registry-cn.rofilter%2Frofilter--mcp-2ED9A8)](https://registry.modelcontextprotocol.io/?q=rofilter)
 [![Website](https://img.shields.io/badge/website-rofilter.cn-0B8F92)](https://rofilter.cn)
 [![Transport](https://img.shields.io/badge/transport-streamable--http-blue)](https://rofilter.cn/mcp)
+[![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-plugin%20bundle-2ED9A8)](DEEPSEEK-HARNESS.md)
 
 ROFilter is an engineering tool for membrane-based water treatment. It ships with measured parameters for 733 membrane elements across 8 manufacturers (Hydranautics, DuPont, Toray, CSM, LG, Veolia, Vontron, Ovay), analyzes feed water chemistry, and runs full system designs. This repository documents the hosted MCP endpoint that exposes that engine to MCP-capable AI clients.
 
@@ -33,6 +34,29 @@ A token is required. A **shared trial token** is pre-filled in the examples belo
 For your own independent quota, create a free account at [rofilter.cn](https://rofilter.cn) → **MCP service** panel in the top bar (self-service, instant).
 
 > The trial token may be rotated or revoked at any time. If it stops working, generate a personal token with the steps above.
+
+### DeepSeek Harness
+
+One line, no JSON: sidebar **Plugins** → **Add plugin** → paste this → **Install** → **Enable now**.
+
+```
+github:szhuangzan/rofilter-mcp
+```
+
+The npm name `rofilter` becomes the shorter alternative once it is published to the registry.
+
+The bundle ships no code — it mounts DeepSeek Harness's built-in `@deepseek-ai/dsh-mcp-client` against this endpoint and pre-fills the shared trial token. Tools appear as `mcp__rofilter__list_elements`, `mcp__rofilter__run_design`, `mcp__rofilter__analyze_water`, `mcp__rofilter__get_element`, `mcp__rofilter__list_schemes`.
+
+For your own quota, generate a token at [rofilter.cn](https://rofilter.cn) and override one row in `~/.dsh/profiles/<profile>/cordis.patch.yml` — the installed bundle stays untouched:
+
+```yaml
+- id: rofilter-mcp
+  config:
+    headers:
+      Authorization: 'Bearer rfmcp_<your-token>'
+```
+
+Restart DeepSeek Harness afterwards. Full guide (install methods, token, troubleshooting): [DEEPSEEK-HARNESS.md](DEEPSEEK-HARNESS.md).
 
 ### Claude Desktop / Claude Code
 
@@ -67,25 +91,6 @@ For your own independent quota, create a free account at [rofilter.cn](https://r
 }
 ```
 
-### DeepSeek Harness
-
-Install it as a plugin bundle: sidebar **Plugins** → **Add plugin**, paste the package name, then **Install** → **Enable now**.
-
-```
-rofilter
-```
-
-The bundle ships no code — it mounts DeepSeek Harness's built-in `@deepseek-ai/dsh-mcp-client` against this endpoint and pre-fills the shared trial token. For your own quota, generate a token at [rofilter.cn](https://rofilter.cn) and override one row in `~/.dsh/profiles/<profile>/cordis.patch.yml`:
-
-```yaml
-- id: rofilter-mcp
-  config:
-    headers:
-      Authorization: 'Bearer rfmcp_<your-token>'
-```
-
-Tools appear as `mcp__rofilter__list_elements`, `mcp__rofilter__run_design`, and so on. Without an npm registry, the same bundle installs from this repository's Git address (`github:szhuangzan/rofilter-mcp`) or from a local directory.
-
 ### Python (official SDK)
 
 ```python
@@ -118,7 +123,7 @@ async with streamablehttp_client(
 
 ROFilter 是膜法水处理设计工具，本仓库是它对外提供的 MCP 服务说明。远程端点 `https://rofilter.cn/mcp`，在网站顶栏「MCP服务」面板自助生成令牌后即可在 Claude Desktop、Cursor 等客户端接入。工具覆盖元件库查询、单支膜完整参数、进水水质与结垢分析（LSI/CCPP）、系统设计计算与行业方案模板；结果与网页端同引擎同数值。计算结果用于方案阶段比选与校核，交付前建议用厂商官方软件复核。
 
-DeepSeek Harness 用户可以直接在侧栏「插件 → 添加插件」里输入 `rofilter` 一键接入，无需手写配置。
+DeepSeek Harness 用户不用手写配置：侧栏「插件 → 添加插件」，粘贴 `github:szhuangzan/rofilter-mcp` 即可安装（npm 包名 `rofilter` 发布后可用更短的写法）。详见 [DEEPSEEK-HARNESS.md](DEEPSEEK-HARNESS.md)。
 
 ## Links
 
