@@ -1,16 +1,16 @@
 {
   "name": "rofilter",
-  "version": "1.0.0",
-  "publishConfig": {
-    "access": "public"
-  },
-  "description": "ROFilter reverse-osmosis design MCP server (rofilter.cn) as a one-step DeepSeek Harness plugin bundle: membrane library, water analysis, full system design.",
+  "version": "2.0.0",
+  "description": "ROFilter reverse-osmosis design MCP server (rofilter.cn): membrane library, water analysis & full system design. Works as a stdio MCP server (Coze/Claude/Cursor) and a DeepSeek Harness bundle.",
   "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "coze",
+    "claude",
     "dsh-plugin",
     "dsh-bundle",
     "deepseek-harness",
-    "mcp",
-    "model-context-protocol",
     "reverse-osmosis",
     "ro-membrane",
     "water-treatment"
@@ -21,21 +21,28 @@
     "url": "git+https://github.com/szhuangzan/rofilter-mcp.git"
   },
   "bugs": {
-    "url": "https://rofilter.cn"
+    "url": "https://github.com/szhuangzan/rofilter-mcp/issues"
   },
   "license": "MIT",
   "author": "rofilter.cn",
-  "exports": {
-    "./locale/*.json": "./locale/*.json",
-    "./icon": "./icon.svg"
+  "bin": {
+    "rofilter-mcp": "./bin/rofilter-mcp.js"
   },
+  "main": "./bin/rofilter-mcp.js",
   "files": [
+    "bin/",
     "cordis.patch.yml",
     "locale/*.json",
     "icon.svg",
     "README.md",
     "LICENSE"
   ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
