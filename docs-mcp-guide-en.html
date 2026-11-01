@@ -50,7 +50,7 @@
 <div class="wrap">
 <header>
   <h1>MCP Usage Guide: Let an AI Assistant Do RO Design</h1>
-  <p>For Doubao/Coze, Qwen, WorkBuddy, Claude, Cursor, Cherry Studio, TeleAgent, DeepSeek Harness and other MCP-capable clients · updated 2026-11-01 · npm package rofilter@2.1.0 · 733+ elements from 8 manufacturers</p>
+  <p>For Doubao/Coze, Qwen, WorkBuddy, Claude, Cursor, Cherry Studio, TeleAgent, DeepSeek Harness and other MCP-capable clients · updated 2026-11-02 · npm package rofilter@2.1.2 · 744 elements from 8 manufacturers</p>
   <div class="lang"><a href="/static/docs/mcp-guide.html" hreflang="zh-CN">中文</a></div>
 </header>
 
@@ -59,7 +59,7 @@
 <table>
 <thead><tr><th>Platform</th><th>How</th><th>Notes</th></tr></thead>
 <tbody>
-<tr><td><b>Doubao / Coze</b></td><td>Plugins → Create → <b>MCP</b> → <b>npm</b>: package <code>rofilter</code>, command <code>rofilter-mcp</code></td><td>Coze runs it via <code>npx</code> automatically. If it reports "package validation failed", use local command instead: command <code>npx</code>, args <code>-y https://rofilter.cn/npm/rofilter/-/rofilter-2.1.0.tgz</code> (self-hosted tarball, no public npm needed)</td></tr>
+<tr><td><b>Doubao / Coze</b></td><td>Plugins → Create → <b>MCP</b> → <b>npm</b>: package <code>rofilter</code>, command <code>rofilter-mcp</code></td><td>Coze runs it via <code>npx</code> automatically. If it reports "package validation failed", use local command instead: command <code>npx</code>, args <code>-y https://rofilter.cn/npm/rofilter/-/rofilter-2.1.2.tgz</code> (self-hosted tarball, no public npm needed)</td></tr>
 <tr><td><b>Qwen</b></td><td>Qwen Code: add to <code>~/.qwen/settings.json</code>; Bailian / app orchestration: HTTP</td><td>stdio: <code>{"command":"npx","args":["-y","rofilter"]}</code> with <code>env.ROFILTER_TOKEN</code>; HTTP endpoint <code>https://rofilter.cn/mcp</code> + Bearer</td></tr>
 <tr><td><b>WorkBuddy</b></td><td>MCP servers → add custom MCP (stdio)</td><td>Command <code>npx</code>, args <code>-y rofilter</code>; remote-capable versions can use HTTP directly</td></tr>
 <tr><td><b>Claude Desktop / Code</b></td><td><code>claude_desktop_config.json</code> or <code>claude mcp add rofilter -- npx -y rofilter</code></td><td>Config JSON in section 7 below</td></tr>
@@ -72,7 +72,7 @@
 <table>
 <thead><tr><th>Tool</th><th>Capability</th><th>Typical use</th></tr></thead>
 <tbody>
-<tr><td><code>list_elements</code></td><td>Search elements by brand, series, keyword or applicable TDS</td><td>Selection, finding substitutes, screening by water quality</td></tr>
+<tr><td><code>list_elements</code></td><td>Search by brand, series, keyword or applicable TDS; first 30 by default, paginate with <code>offset</code>+<code>limit</code>, or <code>all=true</code> to return everything</td><td>Selection, finding substitutes, screening by water quality</td></tr>
 <tr><td><code>get_element</code></td><td>Full parameters and operating limits of one element</td><td>Checking temperature ceiling, pH range, maximum pressure drop</td></tr>
 <tr><td><code>analyze_water</code></td><td>TDS, conductivity, osmotic pressure, LSI/CCPP, salt saturation</td><td>Deciding whether RO is viable, whether softening or antiscalant is needed</td></tr>
 <tr><td><code>run_design</code></td><td>Multi-stage design: pressure, permeate quality, energy, per-stage flux</td><td>Design checking, energy comparison, array optimisation</td></tr>
@@ -132,7 +132,7 @@
 <tr><td>Contents</td><td><code>SKILL.md</code> main workflow; <code>references/water-quality.md</code> water and scaling assessment; <code>references/design-tuning.md</code> thresholds, tuning and regression case; <code>references/access.md</code> connection and troubleshooting</td></tr>
 <tr><td>Installation</td><td>Unzip and place the whole <code>rofilter-design</code> folder into your client's skills directory, then restart the client</td></tr>
 <tr><td>Token still required</td><td>The pack is the "how to use the tools" manual and <b>contains no token</b>; generate your own in the app</td></tr>
-<tr><td>Version</td><td>rev.2 · 2026-10-28 (library 733 elements / 8 manufacturers); updated when the library or tools change</td></tr>
+<tr><td>Version</td><td>rev.3 · 2026-11-02 (library 744 elements / 8 manufacturers); updated when the library or tools change</td></tr>
 <tr><td>Two layouts</td><td><a href="/static/downloads/rofilter-mcp-skill.zip" download>Standard</a> (rofilter-design/SKILL.md, for Claude Code etc.); <a href="/static/downloads/rofilter-mcp-skill-flat.zip" download>flat</a> (SKILL.md at zip root, for Coze/Doubao skill import)</td></tr>
 </tbody></table>
 <div class="tip"><b>No Agent Skills support?</b> Use the prompts in section 2 directly — the result is the same. The pack only fixes the workflow and thresholds so the assistant cannot skip steps.</div>

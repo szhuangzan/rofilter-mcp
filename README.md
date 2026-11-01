@@ -8,7 +8,7 @@ npm 包：[**rofilter**](https://www.npmjs.com/package/rofilter)（`npx -y rofil
 
 | 工具 | 作用 |
 |---|---|
-| `list_elements` | 查膜元件库（744 件，8 个品牌，支持 brand / family / keyword / TDS 筛选） |
+| `list_elements` | 查膜元件库（744 件，8 个品牌，支持 brand / family / keyword / TDS 筛选；默认前 30 条，支持 offset+limit 分页，all=true 一次取全量） |
 | `get_element` | 取单支膜完整参数与运行边界 |
 | `analyze_water` | 进水水质分析：TDS、电导率、渗透压、LSI/Ryznar/CCPP、碳酸平衡、盐类饱和度 |
 | `run_design` | 完整多段系统设计：进水压力、产水 TDS、能耗、逐段通量/压差 |
@@ -245,3 +245,5 @@ Zero dependencies (Node ≥18). Ships a shared trial token (1,000 `run_design` c
 # License
 
 MIT. See [LICENSE](LICENSE).
+
+> AI生成
