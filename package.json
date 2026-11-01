@@ -1,51 +1,57 @@
-{
-  "name": "rofilter",
-  "version": "2.0.0",
-  "description": "ROFilter reverse-osmosis design MCP server (rofilter.cn): membrane library, water analysis & full system design. Works as a stdio MCP server (Coze/Claude/Cursor) and a DeepSeek Harness bundle.",
-  "keywords": [
-    "mcp",
-    "mcp-server",
-    "model-context-protocol",
-    "coze",
-    "claude",
-    "dsh-plugin",
-    "dsh-bundle",
-    "deepseek-harness",
-    "reverse-osmosis",
-    "ro-membrane",
-    "water-treatment"
-  ],
-  "homepage": "https://rofilter.cn",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/szhuangzan/rofilter-mcp.git"
-  },
-  "bugs": {
-    "url": "https://github.com/szhuangzan/rofilter-mcp/issues"
-  },
-  "license": "MIT",
-  "author": "rofilter.cn",
-  "bin": {
-    "rofilter-mcp": "./bin/rofilter-mcp.js"
-  },
-  "main": "./bin/rofilter-mcp.js",
-  "files": [
-    "bin/",
-    "cordis.patch.yml",
-    "locale/*.json",
-    "icon.svg",
-    "README.md",
-    "LICENSE"
-  ],
-  "engines": {
-    "node": ">=18"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "dsh": {
-    "bundle": {
-      "patch": "./cordis.patch.yml"
-    }
-  }
+﻿{
+    "name":  "rofilter",
+    "version":  "2.1.0",
+    "description":  "ROFilter reverse-osmosis design MCP server (rofilter.cn): membrane library, water analysis \u0026 full system design. stdio MCP (Coze/Doubao, Qwen, WorkBuddy, Claude, Cursor), Streamable HTTP, DeepSeek Harness bundle, plus Agent Skill zips.",
+    "keywords":  [
+                     "mcp",
+                     "mcp-server",
+                     "model-context-protocol",
+                     "coze",
+                     "doubao",
+                     "qwen",
+                     "workbuddy",
+                     "claude",
+                     "cursor",
+                     "agent-skills",
+                     "dsh-plugin",
+                     "dsh-bundle",
+                     "deepseek-harness",
+                     "reverse-osmosis",
+                     "ro-membrane",
+                     "water-treatment"
+                 ],
+    "homepage":  "https://rofilter.cn",
+    "repository":  {
+                       "type":  "git",
+                       "url":  "git+https://github.com/szhuangzan/rofilter-mcp.git"
+                   },
+    "bugs":  {
+                 "url":  "https://github.com/szhuangzan/rofilter-mcp/issues"
+             },
+    "license":  "MIT",
+    "author":  "rofilter.cn",
+    "bin":  {
+                "rofilter-mcp":  "./bin/rofilter-mcp.js"
+            },
+    "main":  "./bin/rofilter-mcp.js",
+    "files":  [
+                  "bin/",
+                  "skill/*.zip",
+                  "cordis.patch.yml",
+                  "locale/*.json",
+                  "icon.svg",
+                  "README.md",
+                  "LICENSE"
+              ],
+    "engines":  {
+                    "node":  "\u003e=18"
+                },
+    "publishConfig":  {
+                          "access":  "public"
+                      },
+    "dsh":  {
+                "bundle":  {
+                               "patch":  "./cordis.patch.yml"
+                           }
+            }
 }
