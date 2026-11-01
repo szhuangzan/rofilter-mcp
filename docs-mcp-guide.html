@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP 使用指南：让 AI 助手做反渗透设计 - ROFilter</title>
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://rofilter.cn/static/docs/mcp-guide.html">
+<link rel="alternate" hreflang="zh-CN" href="https://rofilter.cn/static/docs/mcp-guide.html">
+<link rel="alternate" hreflang="en" href="https://rofilter.cn/static/docs/mcp-guide.en.html">
+<link rel="alternate" hreflang="x-default" href="https://rofilter.cn/static/docs/mcp-guide.html">
+<style>
+  :root { --blue: #002f5d; --blue2: #2f7fc1; --bg: #f4f7f9; --border: #c9d8e6; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; font-size: 13.5px; color: #2c3e50; background: var(--bg); margin: 0; line-height: 1.75; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 20px 60px; }
+  header { border-bottom: 3px solid var(--blue); margin-bottom: 20px; padding-bottom: 12px; position: relative; }
+  .lang { position: absolute; right: 0; top: 2px; font-size: 12.5px; }
+  .lang a { color: var(--blue2); text-decoration: none; border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px; background: #fff; }
+  .lang a:hover { border-color: var(--blue2); }
+  @media (max-width: 600px) {
+    .lang { position: static; margin: 10px 0 0; }
+    ul, ol, p, td, th, figcaption, .tip, .ask { overflow-wrap: break-word; }
+    .k, code { overflow-wrap: anywhere; }
+  }
+  header h1 { color: var(--blue); font-size: 22px; margin: 0 0 4px; }
+  header p { color: #5a6b7b; margin: 0; font-size: 12.5px; }
+  h2 { color: var(--blue); font-size: 16px; border-left: 4px solid var(--blue2); margin: 28px 0 10px; background: #eef5fb; padding: 6px 10px; border-radius: 0 4px 4px 0; }
+  h3 { color: #1a4a76; font-size: 14px; margin: 18px 0 6px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; background: #fff; font-size: 12.5px; }
+  th, td { border: 1px solid var(--border); padding: 5px 9px; text-align: left; vertical-align: top; }
+  th { background: #eef5fb; color: #123c5e; }
+  code, .k { background: #eef2f6; border: 1px solid #d8e2ec; border-radius: 3px; padding: 0 5px; font-size: 12px; color: #14507e; }
+  pre { background: #fff; border: 1px solid var(--border); border-radius: 5px; padding: 10px 12px; overflow-x: auto; font-size: 12px; line-height: 1.6; }
+  .ask { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--blue2); border-radius: 4px; padding: 9px 13px; margin: 8px 0; font-size: 13px; }
+  .ask b { color: var(--blue); display: block; margin-bottom: 2px; font-size: 12.5px; }
+  .tip { background: #fff8e6; border: 1px solid #f0dfb2; border-left: 4px solid #f5b22d; border-radius: 3px; padding: 8px 12px; margin: 10px 0; font-size: 12.5px; }
+  .tip b { color: #9a6700; }
+  .dl { display: inline-block; background: var(--blue); color: #fff; text-decoration: none; padding: 7px 16px; border-radius: 5px; font-size: 13px; font-weight: 600; }
+  .dl:hover { background: var(--blue2); }
+  footer { margin-top: 40px; color: #889; font-size: 12px; border-top: 1px solid var(--border); padding-top: 10px; }
+  footer .beian-line { margin-top: 8px; }
+  footer .beian-line a { color: #7b8a99; text-decoration: none; margin: 0 8px; white-space: nowrap; }
+  footer .beian-line a:hover { color: var(--blue2); text-decoration: underline; }
+  footer .beian-line .beian-ico { width: 18px; height: 20px; margin-right: 4px; vertical-align: -4px; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>MCP 使用指南：让 AI 助手做反渗透设计</h1>
+  <p>适用于豆包/扣子、通义千问、WorkBuddy、Claude、Cursor、Cherry Studio、TeleAgent、DeepSeek Harness 等支持 MCP 的客户端 · 更新于 2026-11-01 · npm 包 rofilter@2.1.0 · 元件库 733+ 支 / 8 家厂商 · 技能包 rev.2</p>
+  <div class="lang"><a href="/static/docs/mcp-guide.en.html" hreflang="en">EN</a></div>
+</header>
+
+<h2>一、各 AI 助手接入方式（2026-11 新增）</h2>
+<p>rofilter 现已发布为 <b>npm 包</b>（<code>rofilter</code>，含零依赖 stdio 服务器 <code>rofilter-mcp</code>），并托管了 <b>tarball 直装包</b>，几乎全部主流 Agent 都能一键接入：</p>
+<table>
+<thead><tr><th>平台</th><th>接入方式</th><th>配置要点</th></tr></thead>
+<tbody>
+<tr><td><b>豆包 / 扣子 Coze</b></td><td>插件 → 创建插件 → <b>MCP</b> → <b>npm</b>：包名 <code>rofilter</code>，命令 <code>rofilter-mcp</code></td><td>扣子会自动 <code>npx</code> 拉起；npm 插件包校验失败时改用「本地命令」方式：命令 <code>npx</code>，参数 <code>-y https://rofilter.cn/npm/rofilter/-/rofilter-2.1.0.tgz</code>（自托管 tarball，不走公网 npm）</td></tr>
+<tr><td><b>通义千问（Qwen Code）</b></td><td><code>~/.qwen/settings.json</code> 里加 <code>mcpServers.rofilter = {command:"npx", args:["-y","rofilter"]}</code></td><td>需令牌时加 <code>env.ROFILTER_TOKEN</code>；应用编排/百炼平台只能 HTTP：端点 <code>https://rofilter.cn/mcp</code> + Bearer 头</td></tr>
+<tr><td><b>WorkBuddy</b></td><td>MCP 服务器设置 → 自定义 MCP：命令 <code>npx</code>，参数 <code>-y rofilter</code></td><td>支持远程 MCP 的版本可直接 HTTP 接入</td></tr>
+<tr><td><b>Claude Desktop / Code</b></td><td><code>claude_desktop_config.json</code> 或 <code>claude mcp add rofilter -- npx -y rofilter</code></td><td>配置 JSON 见下方第八节</td></tr>
+<tr><td><b>Cursor / Windsurf / Zed / Gemini CLI</b></td><td>各自的 <code>mcp.json</code> / <code>mcp_config.json</code> / <code>settings.json</code></td><td>同为 <code>npx -y rofilter</code>，或 HTTP 直连</td></tr>
+<tr><td><b>DeepSeek Harness</b></td><td>插件面板搜索/粘贴 <code>rofilter</code> 安装（配置组合包自动挂载）</td><td>详见 GitHub 仓库 <code>szhuangzan/rofilter-mcp</code> 的 DEEPSEEK-HARNESS.md</td></tr>
+</tbody></table>
+<div class="tip"><b>豆包/扣子专属提示：</b>扣子上传 npm 包报「插件包校验失败」时，优先用上面「本地命令 + tarball 直链」方式（不依赖公网 npm 源）；技能（Skill）方式则上传 <a href="/static/downloads/rofilter-mcp-skill-flat.zip" download>rofilter-mcp-skill-flat.zip</a>（根目录即 SKILL.md，兼容扣子解压规则）。</div>
+
+<h2>二、这 5 个工具能做什么</h2>
+<table>
+<thead><tr><th>工具</th><th>能力</th><th>典型用途</th></tr></thead>
+<tbody>
+<tr><td><code>list_elements</code></td><td>按品牌、系列、关键词、适用 TDS 检索元件</td><td>选型、找替代、按水质筛候选</td></tr>
+<tr><td><code>get_element</code></td><td>单支元件的完整参数与运行边界</td><td>核对最高温度、pH 范围、最大压差</td></tr>
+<tr><td><code>analyze_water</code></td><td>TDS、电导、渗透压、LSI/CCPP、盐类饱和度</td><td>判断能否直接进 RO、要不要软化或加阻垢剂</td></tr>
+<tr><td><code>run_design</code></td><td>多段系统设计计算：压力、产水水质、能耗、逐段通量</td><td>方案核算、能耗对比、排列优化</td></tr>
+<tr><td><code>list_schemes</code></td><td>行业通用配置模板</td><td>没有排布思路时取起点</td></tr>
+</tbody></table>
+<p><b>它不做什么：</b>不做设备选型报价、不替代厂家官方软件出具质保计算书、不处理图纸和土建。结果是设计初稿与比选依据。</p>
+
+<h2>三、六种典型问法（可直接复制）</h2>
+
+<div class="ask"><b>① 选型</b>帮我从海德能的产品里选 3 支适合 TDS 2000 mg/L、单套产水 100 m³/h 的苦咸水膜，说明选择理由和运行边界。</div>
+
+<div class="ask"><b>② 水质判定</b>这股水的 LSI 和结垢风险怎么样？Ca 40、Mg 20、Na 460、Cl 710、SO₄ 100、HCO₃ 150 mg/L，pH 7.5，25℃。需要软化还是加阻垢剂？</div>
+
+<div class="ask"><b>③ 设计核算</b>用 ESPA2-LD，30 支压力容器 × 6 支，回收率 75%，产水 100 m³/h，帮我算进水压力、产水 TDS、能耗和浓水饱和度，并判断配置是否合理。</div>
+
+<div class="ask"><b>④ 多品牌对比</b>同样的水质和工况，把海德能、杜邦、东丽各算一遍，用表格对比进水压力、单位能耗、平均通量和浓水 LSI，说明差在哪里。</div>
+
+<div class="ask"><b>⑤ 结果判读</b>这个计算结果里有哪些指标越界？通量、末段 β 值和浓水 LSI 分别是多少，超标了应该先调哪个参数？</div>
+
+<div class="ask"><b>⑥ 反向优化</b>现在 100 支容器做 100 m³/h，平均通量只有 4.5 lmh，帮我把膜面积压到通量 15 lmh 左右，重新出一版并对比投资与能耗。</div>
+
+<h2>四、提问给得越全，结果越准</h2>
+<p>AI 会按你给的信息建模，缺项按 0 或默认值处理。想让结果能用于方案，最好一次给全：</p>
+<table>
+<thead><tr><th>类别</th><th>需要提供</th><th>缺了会怎样</th></tr></thead>
+<tbody>
+<tr><td>水质</td><td>Ca、Mg、Na、K、HCO₃、SO₄、Cl、NO₃、F、SiO₂、Ba、Sr（mg/L）</td><td>缺 Ba/Sr/SiO₂ 会低估结垢风险</td></tr>
+<tr><td>工况</td><td>pH、水温、产水量、回收率、套数</td><td>默认 pH 7.0 / 25℃，低温工况产水会算多</td></tr>
+<tr><td>排列</td><td>几段、每段几个容器、每容器几支</td><td>AI 会自己排，可能不是你要的方案</td></tr>
+<tr><td>目标</td><td>产水 TDS 或脱盐率要求、能耗上限、投资敏感度</td><td>只能给出“算得通”而不是“选得对”</td></tr>
+</tbody></table>
+<div class="tip"><b>提示：</b>直接说“按你假设的典型水质算，并列出假设”也完全可以，前提是让 AI 把假设写在结果里，方便你核对。</div>
+
+<h2>五、常见问题与排查</h2>
+<table>
+<thead><tr><th>现象</th><th>原因</th><th>处理</th></tr></thead>
+<tbody>
+<tr><td>客户端里看不到这 5 个工具</td><td>客户端不支持远程 HTTP MCP，或配置未生效</td><td>确认客户端版本；改完配置要完全重启；也可用 <code>?token=</code> 方式</td></tr>
+<tr><td>401 / 403</td><td>令牌错误、已吊销，或头里少了 <code>Bearer </code></td><td>在「个人设置 → MCP 接入」重新生成并复制完整令牌</td></tr>
+<tr><td>429 或提示次数达上限</td><td>当日配额用尽</td><td>次日自然日重置；需要更多联系管理员</td></tr>
+<tr><td>提示令牌已绑定其他 IP</td><td>限次令牌只允许一个出口 IP</td><td>换网络/设备请重新生成，或让管理员改为不限次数</td></tr>
+<tr><td>GET <code>/mcp</code> returns 405</td><td>Streamable HTTP 端点的 GET（服务端主动推送）本服务不开放</td><td>正常现象，客户端会自动改用请求/响应模式；需要 SSE 传输请用 <code>/mcp/sse</code></td></tr>
+<tr><td>结果与网页端差几个百分点</td><td>水质缺项、温度、膜龄、污染系数不同</td><td>逐项对齐输入再比较，不要先怀疑引擎</td></tr>
+<tr><td>提示“找不到元件”</td><td>元件名与库内字符串不一致</td><td>先让 AI 用 <code>list_elements</code> 检索准确名称，再计算</td></tr>
+</tbody></table>
+
+<div class="tip"><b>只支持 SSE 传输的平台（阿里云百炼「自定义 MCP 服务」等）：</b>这类平台的传输协议只接受 SSE，请填服务地址 <code>https://rofilter.cn/mcp/sse</code>，协议选 <code>sse</code>，请求头加 <code>Authorization: Bearer &lt;令牌&gt;</code>。建流后服务端先回一条 <code>endpoint</code> 事件告知回传地址，之后的调用结果都走这条流返回。支持 Streamable HTTP 的客户端继续用 <code>https://rofilter.cn/mcp</code>，两条通道的工具与计算结果完全相同。「MCP 服务」面板新增的 SSE 页签可直接复制这份配置。</div>
+
+<h2>六、技能包（Agent Skills）</h2>
+<p>如果你用的客户端支持 Agent Skills（TeleAgent、Claude Code 等），可以直接下载技能包：AI 会按固定的设计流程工作——先判水质、再选型、核边界、跑计算、判读结果，不会跳步，也会把假设写在结论里。</p>
+<p>
+  <a class="dl" href="/static/downloads/rofilter-mcp-skill.zip" download>下载技能包（SKILL.md + 3 份参考资料，约 12 KB）</a>
+</p>
+<table>
+<thead><tr><th>项目</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>包含内容</td><td><code>SKILL.md</code> 主流程；<code>references/water-quality.md</code> 水质与结垢判读；<code>references/design-tuning.md</code> 阈值与调参、基准算例；<code>references/access.md</code> 接入与排错</td></tr>
+<tr><td>安装方式</td><td>解压后把 <code>rofilter-design</code> 整个目录放入客户端的 skills 目录，重启客户端</td></tr>
+<tr><td>仍需令牌</td><td>技能只是“怎么用工具”的说明书，<b>不含令牌</b>；请用自己的账号生成令牌填入 MCP 配置</td></tr>
+<tr><td>版本</td><td>rev.2 · 2026-10-28（对应元件库 733 支 / 8 家厂商）；元件库或工具更新后会同步新版本</td></tr>
+<tr><td>两种布局</td><td><a href="/static/downloads/rofilter-mcp-skill.zip" download>标准包</a>（rofilter-design/SKILL.md，Claude Code 等）；<a href="/static/downloads/rofilter-mcp-skill-flat.zip" download>扁平包</a>（根目录即 SKILL.md，扣子/豆包技能导入用）</td></tr>
+</tbody></table>
+<div class="tip"><b>不支持技能包的客户端怎么办：</b>直接把上面第二节的示例问法发给 AI，效果一样——技能包的作用是把流程和阈值固化下来，不是必需项。</div>
+
+<h2>七、stdio 与 HTTP 配置速查</h2>
+<h3>stdio（Claude Desktop / Cursor / Windsurf / Qwen Code 等）</h3>
+<pre>{
+  "mcpServers": {
+    "rofilter": {
+      "command": "npx",
+      "args": ["-y", "rofilter"],
+      "env": { "ROFILTER_TOKEN": "rfmcp_你的令牌" }
+    }
+  }
+}</pre>
+<h3>Streamable HTTP（任意支持 HTTP MCP 的客户端）</h3>
+<pre>端点:  https://rofilter.cn/mcp
+请求头: Authorization: Bearer rfmcp_你的令牌</pre>
+<p>只支持 SSE 的平台（阿里云百炼等）：<code>https://rofilter.cn/mcp/sse</code>，工具与计算结果完全相同。</p>
+
+<h2>八、边界说明</h2>
+<p>接口返回的是设计初稿与方案对比依据，不构成带性能保证值的商务承诺。正式设计、投标与质保计算，请以各膜厂商最新样本、官方软件与合同约定为准。元件参数来源于公开技术资料与官方设计软件，可能随厂商版本调整。</p>
+
+<footer>
+  <div>ROFilter 反渗透膜系统设计助手 · 技术支持 admin@rofilter.cn</div>
+  <div>Copyright © 2026-2028 ROFilter. All Rights Reserved.</div>
+<div class="beian-line"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer"><img src="/static/img/beian-icp.svg" alt="ICP备案图标" class="beian-ico beian-icp-ico">湘ICP备2026046279号-1</a><a class="beian-gongan" href="https://beian.mps.gov.cn/#/query/webSearch?code=43021102000428" target="_blank" rel="noreferrer"><img class="beian-ico" src="/static/img/beian-gongan.png" alt="公安备案图标">湘公网安备43021102000428号</a></div>
+</footer>
+</div>
+</body>
+</html>

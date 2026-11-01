@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP Usage Guide: Let an AI Assistant Do RO Design - ROFilter</title>
+<meta name="description" content="How to use the ROFilter MCP server: the five tools, six copy-ready prompts, what to include in a question, troubleshooting, and the optional Agent Skills pack.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://rofilter.cn/static/docs/mcp-guide.en.html">
+<link rel="alternate" hreflang="zh-CN" href="https://rofilter.cn/static/docs/mcp-guide.html">
+<link rel="alternate" hreflang="en" href="https://rofilter.cn/static/docs/mcp-guide.en.html">
+<link rel="alternate" hreflang="x-default" href="https://rofilter.cn/static/docs/mcp-guide.html">
+<style>
+  :root { --blue: #002f5d; --blue2: #2f7fc1; --bg: #f4f7f9; --border: #c9d8e6; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; font-size: 13.5px; color: #2c3e50; background: var(--bg); margin: 0; line-height: 1.75; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 20px 60px; }
+  header { border-bottom: 3px solid var(--blue); margin-bottom: 20px; padding-bottom: 12px; position: relative; }
+  header h1 { color: var(--blue); font-size: 22px; margin: 0 0 4px; }
+  header p { color: #5a6b7b; margin: 0; font-size: 12.5px; }
+  .lang { position: absolute; right: 0; top: 2px; font-size: 12.5px; }
+  .lang a { color: var(--blue2); text-decoration: none; border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px; background: #fff; }
+  .lang a:hover { border-color: var(--blue2); }
+  @media (max-width: 600px) {
+    .lang { position: static; margin: 10px 0 0; }
+    ul, ol, p, td, th, figcaption, .tip, .ask { overflow-wrap: break-word; }
+    .k, code { overflow-wrap: anywhere; }
+  }
+  h2 { color: var(--blue); font-size: 16px; border-left: 4px solid var(--blue2); margin: 28px 0 10px; background: #eef5fb; padding: 6px 10px; border-radius: 0 4px 4px 0; }
+  h3 { color: #1a4a76; font-size: 14px; margin: 18px 0 6px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; background: #fff; font-size: 12.5px; }
+  th, td { border: 1px solid var(--border); padding: 5px 9px; text-align: left; vertical-align: top; }
+  th { background: #eef5fb; color: #123c5e; }
+  code, .k { background: #eef2f6; border: 1px solid #d8e2ec; border-radius: 3px; padding: 0 5px; font-size: 12px; color: #14507e; }
+  pre { background: #fff; border: 1px solid var(--border); border-radius: 5px; padding: 10px 12px; overflow-x: auto; font-size: 12px; line-height: 1.6; }
+  .ask { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--blue2); border-radius: 4px; padding: 9px 13px; margin: 8px 0; font-size: 13px; }
+  .ask b { color: var(--blue); display: block; margin-bottom: 2px; font-size: 12.5px; }
+  .tip { background: #fff8e6; border: 1px solid #f0dfb2; border-left: 4px solid #f5b22d; border-radius: 3px; padding: 8px 12px; margin: 10px 0; font-size: 12.5px; }
+  .tip b { color: #9a6700; }
+  .dl { display: inline-block; background: var(--blue); color: #fff; text-decoration: none; padding: 7px 16px; border-radius: 5px; font-size: 13px; font-weight: 600; }
+  .dl:hover { background: var(--blue2); }
+  footer { margin-top: 40px; color: #889; font-size: 12px; border-top: 1px solid var(--border); padding-top: 10px; }
+  footer .beian-line { margin-top: 8px; }
+  footer .beian-line a { color: #7b8a99; text-decoration: none; margin: 0 8px; white-space: nowrap; }
+  footer .beian-line a:hover { color: var(--blue2); text-decoration: underline; }
+  footer .beian-line .beian-ico { width: 18px; height: 20px; margin-right: 4px; vertical-align: -4px; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>MCP Usage Guide: Let an AI Assistant Do RO Design</h1>
+  <p>For Doubao/Coze, Qwen, WorkBuddy, Claude, Cursor, Cherry Studio, TeleAgent, DeepSeek Harness and other MCP-capable clients · updated 2026-11-01 · npm package rofilter@2.1.0 · 733+ elements from 8 manufacturers</p>
+  <div class="lang"><a href="/static/docs/mcp-guide.html" hreflang="zh-CN">中文</a></div>
+</header>
+
+<h2>1. Connecting your AI assistant (new 2026-11)</h2>
+<p>rofilter is now published as an <b>npm package</b> (name <code>rofilter</code>, with a zero-dependency stdio server <code>rofilter-mcp</code>) and this site hosts a <b>tarball for direct install</b> — nearly every major agent can connect in one step:</p>
+<table>
+<thead><tr><th>Platform</th><th>How</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><b>Doubao / Coze</b></td><td>Plugins → Create → <b>MCP</b> → <b>npm</b>: package <code>rofilter</code>, command <code>rofilter-mcp</code></td><td>Coze runs it via <code>npx</code> automatically. If it reports "package validation failed", use local command instead: command <code>npx</code>, args <code>-y https://rofilter.cn/npm/rofilter/-/rofilter-2.1.0.tgz</code> (self-hosted tarball, no public npm needed)</td></tr>
+<tr><td><b>Qwen</b></td><td>Qwen Code: add to <code>~/.qwen/settings.json</code>; Bailian / app orchestration: HTTP</td><td>stdio: <code>{"command":"npx","args":["-y","rofilter"]}</code> with <code>env.ROFILTER_TOKEN</code>; HTTP endpoint <code>https://rofilter.cn/mcp</code> + Bearer</td></tr>
+<tr><td><b>WorkBuddy</b></td><td>MCP servers → add custom MCP (stdio)</td><td>Command <code>npx</code>, args <code>-y rofilter</code>; remote-capable versions can use HTTP directly</td></tr>
+<tr><td><b>Claude Desktop / Code</b></td><td><code>claude_desktop_config.json</code> or <code>claude mcp add rofilter -- npx -y rofilter</code></td><td>Config JSON in section 7 below</td></tr>
+<tr><td><b>Cursor / Windsurf / Zed / Gemini CLI</b></td><td>Each client's <code>mcp.json</code> / <code>mcp_config.json</code> / <code>settings.json</code></td><td>Same <code>npx -y rofilter</code>, or direct HTTP</td></tr>
+<tr><td><b>DeepSeek Harness</b></td><td>Plugins panel → search or paste <code>rofilter</code> → Install → Enable</td><td>Bundle mounts automatically; see DEEPSEEK-HARNESS.md in the GitHub repo <code>szhuangzan/rofilter-mcp</code></td></tr>
+</tbody></table>
+<div class="tip"><b>Doubao/Coze note:</b> when the npm import shows "package validation failed", prefer the "local command + tarball URL" method above (no public npm dependency). For the Skill route, upload <a href="/static/downloads/rofilter-mcp-skill-flat.zip" download>rofilter-mcp-skill-flat.zip</a> (SKILL.md at the zip root, matching Coze's extraction rules). Hosted tarballs: <a href="/npm/rofilter/index.json">/npm/rofilter/index.json</a>.</div>
+
+<h2>2. What the five tools can do</h2>
+<table>
+<thead><tr><th>Tool</th><th>Capability</th><th>Typical use</th></tr></thead>
+<tbody>
+<tr><td><code>list_elements</code></td><td>Search elements by brand, series, keyword or applicable TDS</td><td>Selection, finding substitutes, screening by water quality</td></tr>
+<tr><td><code>get_element</code></td><td>Full parameters and operating limits of one element</td><td>Checking temperature ceiling, pH range, maximum pressure drop</td></tr>
+<tr><td><code>analyze_water</code></td><td>TDS, conductivity, osmotic pressure, LSI/CCPP, salt saturation</td><td>Deciding whether RO is viable, whether softening or antiscalant is needed</td></tr>
+<tr><td><code>run_design</code></td><td>Multi-stage design: pressure, permeate quality, energy, per-stage flux</td><td>Design checking, energy comparison, array optimisation</td></tr>
+<tr><td><code>list_schemes</code></td><td>Industry configuration templates</td><td>A starting point when you have no array in mind</td></tr>
+</tbody></table>
+<p><b>What it does not do:</b> equipment pricing, warranty-grade reports from a manufacturer's official software, drawings or civil works. The output is a design draft and a basis for comparison.</p>
+
+<h2>3. Six prompts you can copy as-is</h2>
+
+<div class="ask"><b>① Element selection</b>Pick three Hydranautics brackish-water elements suitable for TDS 2000 mg/L and 100 m³/h permeate per train, and explain the choice and operating limits.</div>
+
+<div class="ask"><b>② Water assessment</b>What are the LSI and scaling risk for this water? Ca 40, Mg 20, Na 460, Cl 710, SO₄ 100, HCO₃ 150 mg/L, pH 7.5, 25 °C. Do I need softening or antiscalant?</div>
+
+<div class="ask"><b>③ Design calculation</b>ESPA2-LD, 30 pressure vessels × 6 elements, 75% recovery, 100 m³/h permeate. Calculate feed pressure, permeate TDS, energy and concentrate saturation, and tell me whether the configuration is sound.</div>
+
+<div class="ask"><b>④ Multi-brand comparison</b>At the same water quality and duty, run Hydranautics, DuPont and Toray, then compare feed pressure, specific energy, average flux and concentrate LSI in a table and explain the differences.</div>
+
+<div class="ask"><b>⑤ Result interpretation</b>Which figures in this result are out of range? What are the flux, tail-end beta and concentrate LSI, and which parameter should I adjust first?</div>
+
+<div class="ask"><b>⑥ Reverse optimisation</b>Right now 100 vessels give 100 m³/h at only 4.5 lmh average flux. Cut the membrane area so flux is around 15 lmh, re-run, and compare capex and energy.</div>
+
+<h2>4. Better inputs give better answers</h2>
+<p>The AI models exactly what you give it, and treats missing items as 0 or defaults. To get a result usable in a proposal, provide all of the following:</p>
+<table>
+<thead><tr><th>Category</th><th>Provide</th><th>If missing</th></tr></thead>
+<tbody>
+<tr><td>Water analysis</td><td>Ca, Mg, Na, K, HCO₃, SO₄, Cl, NO₃, F, SiO₂, Ba, Sr (mg/L)</td><td>Missing Ba/Sr/SiO₂ understates scaling risk</td></tr>
+<tr><td>Duty</td><td>pH, water temperature, permeate flow, recovery, number of trains</td><td>Defaults to pH 7.0 / 25 °C, so cold-weather output is overstated</td></tr>
+<tr><td>Array</td><td>Stages, vessels per stage, elements per vessel</td><td>The AI will propose its own array, which may not be what you want</td></tr>
+<tr><td>Targets</td><td>Permeate TDS or rejection, energy ceiling, capex sensitivity</td><td>You get "it calculates" rather than "it is the right choice"</td></tr>
+</tbody></table>
+<div class="tip"><b>Tip:</b> it is perfectly acceptable to say "use your typical water quality and list your assumptions" — as long as the assumptions appear in the answer so you can check them.</div>
+
+<h2>5. Troubleshooting</h2>
+<table>
+<thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>The five tools do not appear</td><td>Client does not support remote HTTP MCP, or the config was not reloaded</td><td>Check the client version; restart it fully after editing config; the <code>?token=</code> form is an alternative</td></tr>
+<tr><td>401 / 403</td><td>Wrong or revoked token, or the <code>Bearer </code> prefix is missing</td><td>Regenerate in "Personal settings → MCP access" and copy the full token</td></tr>
+<tr><td>429 or "daily limit reached"</td><td>Daily quota exhausted</td><td>Resets on the next calendar day; contact the administrator for a higher limit</td></tr>
+<tr><td>"Token is bound to another IP"</td><td>A limited token allows one egress IP only</td><td>Regenerate after changing network, or ask for an unlimited token</td></tr>
+<tr><td>GET on <code>/mcp</code> returns 405</td><td>The Streamable HTTP endpoint does not open a GET server-push stream</td><td>Normal; the client falls back to request/response mode. For SSE transport use <code>/mcp/sse</code></td></tr>
+<tr><td>Results differ from the web app by a few percent</td><td>Different water analysis, temperature, membrane age or fouling factor</td><td>Align inputs item by item before suspecting the engine</td></tr>
+<tr><td>"Element not found"</td><td>Name does not match the library string</td><td>Have the AI look it up with <code>list_elements</code> first</td></tr>
+</tbody></table>
+
+<div class="tip"><b>Platforms that only accept SSE transport (e.g. Alibaba Cloud Bailian "custom MCP service"):</b> these platforms allow <code>sse</code> only. Use the endpoint <code>https://rofilter.cn/mcp/sse</code>, set the transport to <code>sse</code>, and add the header <code>Authorization: Bearer &lt;token&gt;</code>. After the stream opens, the server first sends an <code>endpoint</code> event with the callback URL; all subsequent results come back on the same stream. Clients that support Streamable HTTP can keep using <code>https://rofilter.cn/mcp</code> — both transports expose the same tools and produce identical results.</div>
+
+<h2>6. Skill pack (Agent Skills)</h2>
+<p>If your client supports Agent Skills (TeleAgent, Claude Code and similar), you can download the skill pack: the AI then follows a fixed workflow — assess water, select elements, verify limits, run the design, interpret the result — without skipping steps, and it states its assumptions in the conclusion.</p>
+<p>
+  <a class="dl" href="/static/downloads/rofilter-mcp-skill.zip" download>Download skill pack (SKILL.md + 3 references, ~12 KB)</a>
+</p>
+<table>
+<thead><tr><th>Item</th><th>Details</th></tr></thead>
+<tbody>
+<tr><td>Contents</td><td><code>SKILL.md</code> main workflow; <code>references/water-quality.md</code> water and scaling assessment; <code>references/design-tuning.md</code> thresholds, tuning and regression case; <code>references/access.md</code> connection and troubleshooting</td></tr>
+<tr><td>Installation</td><td>Unzip and place the whole <code>rofilter-design</code> folder into your client's skills directory, then restart the client</td></tr>
+<tr><td>Token still required</td><td>The pack is the "how to use the tools" manual and <b>contains no token</b>; generate your own in the app</td></tr>
+<tr><td>Version</td><td>rev.2 · 2026-10-28 (library 733 elements / 8 manufacturers); updated when the library or tools change</td></tr>
+<tr><td>Two layouts</td><td><a href="/static/downloads/rofilter-mcp-skill.zip" download>Standard</a> (rofilter-design/SKILL.md, for Claude Code etc.); <a href="/static/downloads/rofilter-mcp-skill-flat.zip" download>flat</a> (SKILL.md at zip root, for Coze/Doubao skill import)</td></tr>
+</tbody></table>
+<div class="tip"><b>No Agent Skills support?</b> Use the prompts in section 2 directly — the result is the same. The pack only fixes the workflow and thresholds so the assistant cannot skip steps.</div>
+
+<h2>7. stdio and HTTP config quick reference</h2>
+<h3>stdio (Claude Desktop / Cursor / Windsurf / Qwen Code, etc.)</h3>
+<pre>{
+  "mcpServers": {
+    "rofilter": {
+      "command": "npx",
+      "args": ["-y", "rofilter"],
+      "env": { "ROFILTER_TOKEN": "rfmcp_your-token" }
+    }
+  }
+}</pre>
+<h3>Streamable HTTP (any HTTP-MCP client)</h3>
+<pre>Endpoint: https://rofilter.cn/mcp
+Header:   Authorization: Bearer rfmcp_your-token</pre>
+<p>SSE-only platforms (Alibaba Cloud Bailian, etc.): <code>https://rofilter.cn/mcp/sse</code> — same tools, identical results.</p>
+
+<h2>8. Scope</h2>
+<p>The API returns a design draft and a basis for comparison; it is not a commercial commitment with guaranteed performance values. For formal design, tendering and warranty calculations, rely on the latest datasheets, official software and contractual terms. Element parameters come from public technical literature and official design software and may change between vendor versions.</p>
+
+<footer>
+  <div>ROFilter — Reverse Osmosis System Design Assistant · Support admin@rofilter.cn</div>
+  <div>Copyright © 2026-2028 ROFilter. All Rights Reserved.</div>
+<div class="beian-line"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer"><img src="/static/img/beian-icp.svg" alt="ICP filing icon" class="beian-ico beian-icp-ico">湘ICP备2026046279号-1</a><a class="beian-gongan" href="https://beian.mps.gov.cn/#/query/webSearch?code=43021102000428" target="_blank" rel="noreferrer"><img class="beian-ico" src="/static/img/beian-gongan.png" alt="Public security filing icon">湘公网安备43021102000428号</a></div>
+</footer>
+</div>
+</body>
+</html>

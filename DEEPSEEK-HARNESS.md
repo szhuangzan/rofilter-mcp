@@ -12,9 +12,10 @@
 
 | 方式 | 粘贴内容 | 说明 |
 |---|---|---|
-| Git 地址（现在可用） | `github:szhuangzan/rofilter-mcp` | 需要能访问 GitHub |
-| npm 包名（发布后可用） | `rofilter` | 最短，升级方便 |
-| 安装包直链 | `https://…/rofilter-1.0.0.tgz` | 不依赖任何账号 |
+| npm 包名 | `rofilter` | 最短，升级方便 |
+| Git 地址 | `github:szhuangzan/rofilter-mcp` | 需要能访问 GitHub |
+| 安装包直链（tarball） | `https://rofilter.cn/npm/rofilter/-/rofilter-2.1.0.tgz` | rofilter.cn 自托管，不依赖任何 npm 源；版本号可换 |
+| npmmirror 直链 | `https://registry.npmmirror.com/rofilter/-/rofilter-2.1.0.tgz` | 国内镜像直装 |
 | 本地目录 | `D:\dsh\rofilter` | 离线分发，粘贴绝对路径 |
 
 装完建议**重启一次** DeepSeek Harness，让 Loader 完整重载。
@@ -74,18 +75,31 @@
 
 **这个包会执行代码吗？**
 
-不会。包里只有 `package.json`、`cordis.patch.yml`、语言文件和图标，没有任何 JS。
-它挂载的是 DeepSeek Harness 自带的 MCP 客户端。
+在 DeepSeek Harness 里不会——DSH 只读 `cordis.patch.yml`，挂载的是 Harness 自带的
+`@deepseek-ai/dsh-mcp-client`。包里的 `bin/rofilter-mcp.js` 是给**其他**客户端
+（豆包/扣子、通义千问、WorkBuddy、Claude、Cursor 等）用的零依赖 stdio 服务器，
+DSH 不会运行它。其他平台的接入办法见 [README.md](README.md)。
+
+## 版本
+
+- 2.1.0（2026-11-01）：新增 stdio 服务器供其他 Agent 使用；包内附 Agent Skills 双布局 zip；全平台接入指南
+- 2.0.0：首个 stdio 版本
+- 1.0.0：纯 DSH 配置组合包
 
 ## English
 
-This repository ships a configuration-only DeepSeek Harness bundle. Install it from the
-**Plugins** sidebar: **Add plugin** → `github:szhuangzan/rofilter-mcp` (or `rofilter` once
-published to npm) → **Install** → **Enable now**, then restart Harness once.
+The package is now published to npm as **`rofilter`** (v2.1.0+): a configuration-only
+DeepSeek Harness bundle (`cordis.patch.yml` mounts the built-in `@deepseek-ai/dsh-mcp-client`
+against `https://rofilter.cn/mcp`), plus a zero-dependency **stdio MCP server**
+(`bin/rofilter-mcp.js`) for every other client (Coze/Doubao, Qwen, WorkBuddy, Claude,
+Cursor — see README.md).
 
-It carries no code: `cordis.patch.yml` mounts the built-in `@deepseek-ai/dsh-mcp-client`
-against `https://rofilter.cn/mcp`. The bundle pre-fills a shared trial token (1,000
-calculations/day for everyone); generate your own at rofilter.cn and override the
-`Authorization` header under row id `rofilter-mcp` in your profile's `cordis.patch.yml`.
+Install from the **Plugins** sidebar: **Add plugin** → `rofilter` · `github:szhuangzan/rofilter-mcp`
+· `https://rofilter.cn/npm/rofilter/-/rofilter-2.1.0.tgz` · or a local path → **Install** →
+**Enable now**, then restart Harness once.
+
+The bundle pre-fills a shared trial token (1,000 calculations/day); generate your own at
+rofilter.cn and override the `Authorization` header under row id `rofilter-mcp` in your
+profile's `cordis.patch.yml`. For stdio clients set the `ROFILTER_TOKEN` env var.
 
 Tools: `mcp__rofilter__list_elements`, `get_element`, `analyze_water`, `run_design`, `list_schemes`.
