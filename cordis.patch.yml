@@ -1,0 +1,23 @@
+# Configuration-only DSH bundle: no Host/Client code, it only mounts the
+# already installed MCP client bridge against the hosted ROFilter MCP server.
+#
+# Users who have their own token can override just this row from their profile
+# patch layer (no need to edit this file):
+#
+#   - id: rofilter-mcp
+#     config:
+#       headers:
+#         Authorization: 'Bearer rfmcp_<your-token>'
+#
+- insert:
+    - id: rofilter-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: rofilter
+        transport: streamable-http
+        url: https://rofilter.cn/mcp
+        headers:
+          # Shared trial token (1,000 shared calculations per day). Replace with
+          # your own token from https://rofilter.cn (MCP service panel).
+          Authorization: 'Bearer rfmcp_1603bb7f5749b0f01f2828ecb43fa1662a8ee8a9'
+        failOnStartupError: false
