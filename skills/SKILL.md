@@ -1,6 +1,6 @@
 ---
 name: rofilter-design
-description: 用 ROFilter MCP 完成反渗透（RO）系统设计全流程——膜元件选型、进水水质与结垢判定、多段系统设计计算、结果判读与调参。当用户提出反渗透/RO 方案设计、膜元件选型或替代比对、产水 TDS 与脱盐率估算、回收率与段数排布、进水压力/泵功率/能耗估算、LSI/CCPP 结垢判断、"这股水能不能进 RO要不要软化"、多方案对比、报价前快速核量，或提到 rofilter/ROFilter/苦咸水膜/海水膜/膜系统计算时使用。工具：list_elements、get_element、analyze_water、run_design、list_schemes。
+description: 用 ROFilter MCP 完成反渗透（RO）系统设计全流程——膜元件选型、进水水质与结垢判定、结垢限定最大回收率评估、多段系统设计计算、结果判读与调参。当用户提出反渗透/RO 方案设计、膜元件选型或替代比对、产水 TDS 与脱盐率估算、回收率与段数排布、进水压力/泵/能耗估算、LSI/CCPP 结垢判断、最大可持续回收率/要不要加阻垢剂或调 pH、"这股水能不能进 RO 要不要软化"、多方案对比、报价前快速核量，或提到 rofilter/ROFilter/苦咸水膜/海水膜/膜系统计算时使用。工具：list_elements、get_element、analyze_water、analyze_scaling、run_design、list_schemes。
 name_cn: ROFilter 反渗透设计
 description_cn: 反渗透系统设计全流程：膜元件选型、水质结垢判定、多段设计计算与结果判读，与 rofilter.cn 网页端共用同一计算内核。
 create_source: super-agent-skill-creator
@@ -20,6 +20,7 @@ create_source: super-agent-skill-creator
 | 工具 | 用途 | 何时调用 |
 |---|---|---|
 | `analyze_water` | TDS、电导率、渗透压、LSI/Ryznar/CCPP、盐类饱和度、碳酸平衡 | 判断能否直接进 RO、要不要软化/加酸/阻垢；设计的第 0 步 |
+| `analyze_scaling` | 结垢评估与最大可持续回收率：加/不加阻垢剂两档上限及限制矿物、设计回收率处逐项浓水判定、阻垢剂推荐、pH 2~11 扫描给最佳 pH 与加酸/加碱量 | 定回收率上限、要不要加酸/阻垢剂；建议在 `run_design` 之前跑 |
 | `list_elements` | 按品牌/系列/关键词/适用 TDS 检索元件；默认前 30 条，支持 offset+limit 分页与 all=true 全量 | 选型、找替代件、按 TDS 段筛；候选超 30 条时翻页取全 |
 | `get_element` | 单件完整参数与运行边界（尺寸、最高温度、pH 范围、最大单支压差） | 选型收敛后核对工况边界，必做 |
 | `run_design` | 多段系统设计计算（核心） | 出压力、产水水质、能耗、逐段通量/压差 |
@@ -28,13 +29,15 @@ create_source: super-agent-skill-creator
 标准链路：
 
 ```
-水质 → analyze_water → list_elements（筛候选）→ get_element（核边界）
+水质 → analyze_water（+analyze_scaling 定回收率上限与阻垢/调 pH）
+     → list_elements（筛候选）→ get_element（核边界）
      → run_design → 判读 →（不达标）调参重跑 → 输出
 ```
 
 按问题类型裁剪：
 
 - 只问"这水能不能上 RO" → 只跑 `analyze_water`
+- 问"这水回收率能到多少 / 要不要加阻垢剂或调 pH" → `analyze_scaling`（顺带给出最大可持续回收率与限制矿物）
 - 问"选什么膜" → `list_elements` + `get_element`，给 2–4 个候选与理由；必要时用 `run_design` 各跑一遍比压力与能耗
 - 问"多少压力/能耗/产水 TDS" → 直接 `run_design`（选型用候选元件）
 - 用户没给水质数据 → 按水类型给一组典型水质并明确标注"示例水质，需以实测为准"（典型值见 `references/water-quality.md`）

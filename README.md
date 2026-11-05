@@ -11,10 +11,11 @@ npm 包：[**rofilter**](https://www.npmjs.com/package/rofilter)（`npx -y rofil
 | `list_elements` | 查膜元件库（744 件，8 个品牌，支持 brand / family / keyword / TDS 筛选；默认前 30 条，支持 offset+limit 分页，all=true 一次取全量） |
 | `get_element` | 取单支膜完整参数与运行边界 |
 | `analyze_water` | 进水水质分析：TDS、电导率、渗透压、LSI/Ryznar/CCPP、碳酸平衡、盐类饱和度 |
+| `analyze_scaling` | 结垢评估与最大可持续回收率：加/不加阻垢剂两档、限制矿物、设计回收率处逐项判定、阻垢剂推荐、pH 扫描给最佳 pH 与加酸/加碱量 |
 | `run_design` | 完整多段系统设计：进水压力、产水 TDS、能耗、逐段通量/压差 |
 | `list_schemes` | 行业方案模板（电力、制药、电子、食品饮料、海淡） |
 
-查询类工具免费，`run_design` 计费（每天免费额度）。
+查询与评估类工具免费，`run_design` 计费（每天免费额度）。
 
 ---
 
