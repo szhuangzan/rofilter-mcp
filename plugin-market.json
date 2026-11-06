@@ -26,8 +26,8 @@
     {
       "name": "rofilter",
       "title": {
-        "en": "ROFilter",
-        "zh": "ROFilter 反渗透设计"
+        "en": "ROFilter - RO Membrane System Design",
+        "zh": "ROFilter 反渗透膜系统设计软件"
       },
       "description": {
         "en": "Reverse osmosis membrane system design: element library, feed-water analysis, feed pressure, permeate TDS, energy and per-stage flux.",
