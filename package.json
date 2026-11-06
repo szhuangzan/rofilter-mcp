@@ -31,7 +31,7 @@
     "license":  "MIT",
     "author":  "rofilter.cn",
     "bin":  {
-                "rofilter-mcp":  "./bin/rofilter-mcp.js"
+                 "rofilter-mcp":  "bin/rofilter-mcp.js"
             },
     "main":  "./bin/rofilter-mcp.js",
     "files":  [
