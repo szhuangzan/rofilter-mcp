@@ -14,8 +14,8 @@
 |---|---|---|
 | npm 包名 | `rofilter` | 最短，升级方便 |
 | Git 地址 | `github:szhuangzan/rofilter-mcp` | 需要能访问 GitHub |
-| 安装包直链（tarball） | `https://rofilter.cn/npm/rofilter/-/rofilter-2.1.5.tgz` | rofilter.cn 自托管，不依赖任何 npm 源；版本号可换 |
-| npmmirror 直链 | `https://registry.npmmirror.com/rofilter/-/rofilter-2.1.5.tgz` | 国内镜像直装 |
+| 安装包直链（tarball） | `https://rofilter.cn/npm/rofilter/-/rofilter-2.1.6.tgz` | rofilter.cn 自托管，不依赖任何 npm 源；版本号可换 |
+| npmmirror 直链 | `https://registry.npmmirror.com/rofilter/-/rofilter-2.1.6.tgz` | 国内镜像直装 |
 | 本地目录 | `D:\dsh\rofilter` | 离线分发，粘贴绝对路径 |
 
 装完建议**重启一次** DeepSeek Harness，让 Loader 完整重载。
@@ -82,6 +82,7 @@ DSH 不会运行它。其他平台的接入办法见 [README.md](README.md)。
 
 ## 版本
 
+- 2.1.6（2026-11）：npm 站点 README 与 Agent Skill 口径修正为 742 件 / 8 品牌（与仓库一致）
 - 2.1.5（2026-11）：元件库口径更新为 742 件 / 8 品牌，接入文案规范
 - 2.1.0（2026-11-01）：新增 stdio 服务器供其他 Agent 使用；包内附 Agent Skills 双布局 zip；全平台接入指南
 - 2.0.0：首个 stdio 版本
@@ -89,14 +90,14 @@ DSH 不会运行它。其他平台的接入办法见 [README.md](README.md)。
 
 ## English
 
-The package is now published to npm as **`rofilter`** (v2.1.5+): a configuration-only
+The package is now published to npm as **`rofilter`** (v2.1.6+): a configuration-only
 DeepSeek Harness bundle (`cordis.patch.yml` mounts the built-in `@deepseek-ai/dsh-mcp-client`
 against `https://rofilter.cn/mcp`), plus a zero-dependency **stdio MCP server**
 (`bin/rofilter-mcp.js`) for every other client (Coze/Doubao, Qwen, WorkBuddy, Claude,
 Cursor — see README.md).
 
 Install from the **Plugins** sidebar: **Add plugin** → `rofilter` · `github:szhuangzan/rofilter-mcp`
-· `https://rofilter.cn/npm/rofilter/-/rofilter-2.1.5.tgz` · or a local path → **Install** →
+· `https://rofilter.cn/npm/rofilter/-/rofilter-2.1.6.tgz` · or a local path → **Install** →
 **Enable now**, then restart Harness once.
 
 The bundle pre-fills a shared trial token (1,000 calculations/day); generate your own at

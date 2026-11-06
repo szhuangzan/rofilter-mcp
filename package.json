@@ -1,6 +1,6 @@
 {
     "name":  "rofilter",
-    "version":  "2.1.5",
+    "version":  "2.1.6",
     "description":  "MCP integration for ROFilter, a reverse-osmosis membrane system design software (rofilter.cn): membrane library, water analysis \u0026 full system design. stdio MCP (Coze/Doubao, Qwen, WorkBuddy, Claude, Cursor), Streamable HTTP, DeepSeek Harness bundle, plus Agent Skill zips.",
     "keywords":  [
                      "mcp",
