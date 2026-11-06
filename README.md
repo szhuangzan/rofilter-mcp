@@ -1,6 +1,6 @@
 # rofilter
 
-ROFilter（[rofilter.cn](https://rofilter.cn)）是一款**反渗透膜系统设计软件**，内置膜元件库（744 件 / 8 品牌）、进水水质分析（TDS / 渗透压 / LSI / 碳酸平衡）、完整系统设计计算（进水压力 / 产水 TDS / 能耗 / 逐段通量）。本包是它的 **MCP 接入能力**，让 AI 助手直接调用同一套计算引擎。
+ROFilter（[rofilter.cn](https://rofilter.cn)）是一款**反渗透膜系统设计软件**，内置膜元件库（742 件 / 8 品牌）、进水水质分析（TDS / 渗透压 / LSI / 碳酸平衡）、完整系统设计计算（进水压力 / 产水 TDS / 能耗 / 逐段通量）。本包是它的 **MCP 接入能力**，让 AI 助手直接调用同一套计算引擎。
 
 npm 包：[**rofilter**](https://www.npmjs.com/package/rofilter)（`npx -y rofilter` 即用）
 
@@ -8,7 +8,7 @@ npm 包：[**rofilter**](https://www.npmjs.com/package/rofilter)（`npx -y rofil
 
 | 工具 | 作用 |
 |---|---|
-| `list_elements` | 查膜元件库（744 件，8 个品牌，支持 brand / family / keyword / TDS 筛选；默认前 30 条，支持 offset+limit 分页，all=true 一次取全量） |
+| `list_elements` | 查膜元件库（742 件，8 个品牌，支持 brand / family / keyword / TDS 筛选；默认前 30 条，支持 offset+limit 分页，all=true 一次取全量） |
 | `get_element` | 取单支膜完整参数与运行边界 |
 | `analyze_water` | 进水水质分析：TDS、电导率、渗透压、LSI/Ryznar/CCPP、碳酸平衡、盐类饱和度 |
 | `analyze_scaling` | 结垢评估与最大可持续回收率：加/不加阻垢剂两档、限制矿物、设计回收率处逐项判定、阻垢剂推荐、pH 扫描给最佳 pH 与加酸/加碱量 |

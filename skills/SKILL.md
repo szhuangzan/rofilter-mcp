@@ -54,7 +54,7 @@ create_source: super-agent-skill-creator
 ### 元件（`list_elements` / `get_element`）
 
 - `family` 代码：`1`/`5` 海水淡化膜、`2` 苦咸水膜、`4` 抗污染苦咸水膜、`6` 纳滤膜、`7` 超滤膜、`8` 家用/低压 RO 膜、`15` 高容量海水膜
-- `brand`：`Hydranautics` / `Toray` / `CSM` / `DuPont` / `Ovay` / `LG` / `Vontron` / `Veolia`（库内 744 件、8 品牌；账号权限不足时可见件数会少，不代表元件不存在）
+- `brand`：`Hydranautics` / `Toray` / `CSM` / `DuPont` / `Ovay` / `LG` / `Vontron` / `Veolia`（库内 742 件、8 品牌；账号权限不足时可见件数会少，不代表元件不存在）
 - **`element` 名称必须与 `list_elements` 返回的字符串完全一致**（含 `-LD` `-4040` `MAX` 等后缀），拼错会导致计算失败
 - 选型先用 `tds` 参数筛适用区间，再用 `get_element` 核对最高温度、pH 范围、最大单支压差
 
@@ -143,7 +143,7 @@ create_source: super-agent-skill-creator
 
 1. 重新打包 `rofilter-design` 目录（`SKILL.md` + `references/`，不含令牌与临时文件），覆盖 `web/static/downloads/rofilter-mcp-skill.zip`
 2. 更新版本标记：`web/static/docs/mcp-guide.html` 页头、`web/index.html` 面板的「×版」标签，两者与压缩包同日同版本
-3. 若元件库、工具描述或判读阈值有变，同步核对四处口径：本文件、`references/`、指南页、面板文案（当前为 **744 支 / 8 家厂商**）
+3. 若元件库、工具描述或判读阈值有变，同步核对四处口径：本文件、`references/`、指南页、面板文案（当前为 **742 支 / 8 家厂商**）
 4. 部署后验证 `https://rofilter.cn/static/downloads/rofilter-mcp-skill.zip` 返回 200、`Content-Type: application/zip`、zip 可正常解压
 
 技能包内永远不放令牌、密钥或账号信息。

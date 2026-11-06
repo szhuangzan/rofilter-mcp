@@ -3,7 +3,7 @@
   "name": "io.github.szhuangzan/rofilter-mcp",
   "title": "ROFilter - Reverse Osmosis Design",
   "description": "Design RO membrane systems: feed pressure, permeate TDS, energy use, flux and per-stage results.",
-  "version": "1.0.43",
+  "version": "2.1.5",
   "websiteUrl": "https://rofilter.cn",
   "repository": {
     "url": "https://github.com/szhuangzan/rofilter-mcp",

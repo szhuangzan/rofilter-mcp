@@ -56,12 +56,12 @@
       },
       "versions": [
         {
-          "version": "1.0.0",
+          "version": "2.1.5",
           "publishTimestamp": 1793491200,
           "source": {
             "type": "git",
             "url": "https://github.com/szhuangzan/rofilter-mcp.git",
-            "commit": "075472f82136f95097084e29f3d29153c876a146"
+            "commit": "3d31055ef8603d431b228e419cef2b0dbf2a868a"
           }
         }
       ]
