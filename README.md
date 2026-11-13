@@ -1,6 +1,6 @@
 # rofilter
 
-ROFilter（[rofilter.cn](https://rofilter.cn)）是一款**反渗透膜系统设计软件**，内置膜元件库（742 件 / 8 品牌）、进水水质分析（TDS / 渗透压 / LSI / 碳酸平衡）、完整系统设计计算（进水压力 / 产水 TDS / 能耗 / 逐段通量）。本包是它的 **MCP 接入能力**，让 AI 助手直接调用同一套计算引擎。
+ROFilter（[rofilter.cn](https://rofilter.cn)）是一款**反渗透膜系统设计软件**，内置 742 件膜元件库（覆盖威立雅、杜邦、东丽、LG、海德能、CSM、沃顿、澳维 8 大品牌）、进水水质分析（TDS / 渗透压 / LSI / 碳酸平衡）、结垢评估与完整多段系统设计（进水压力 / 产水 TDS / 能耗 / 逐段通量）。本包是它的 **MCP 接入能力**，让 AI 助手直接调用同一套计算引擎。
 
 npm 包：[**rofilter**](https://www.npmjs.com/package/rofilter)（`npx -y rofilter` 即用）
 
@@ -234,7 +234,7 @@ docs-mcp-guide*.html           rofilter.cn 端 MCP 接入指南快照
 
 # English
 
-ROFilter is a **reverse-osmosis membrane system design software** (rofilter.cn). This package is its MCP integration — one package, many clients:
+ROFilter is a **reverse-osmosis membrane system design software** (rofilter.cn) with a 742-element library across 8 brands (Veolia, DuPont, Toray, LG, Hydranautics, CSM, Vontron, Ovay), feed-water analysis, scaling assessment, and full multi-stage system design. This package is its MCP integration — one package, many clients:
 
 - **stdio MCP** (Coze/Doubao, Qwen, WorkBuddy, Claude, Cursor, Windsurf, Gemini CLI…): `command: npx`, `args: ["-y", "rofilter"]`, env `ROFILTER_TOKEN`.
 - **Streamable HTTP**: `https://rofilter.cn/mcp` with `Authorization: Bearer rfmcp_…`.

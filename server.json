@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.szhuangzan/rofilter-mcp",
-  "title": "ROFilter - Reverse Osmosis Design",
-  "description": "Design RO membrane systems: feed pressure, permeate TDS, energy use, flux and per-stage results.",
-  "version": "2.1.5",
+  "title": "ROFilter - RO Membrane System Design",
+  "description": "Design reverse-osmosis membrane systems with a 742-element library across 8 brands (Veolia, DuPont, Toray, LG, Hydranautics, CSM, Vontron, Ovay): feed pressure, permeate TDS, energy use, flux and per-stage results.",
+  "version": "2.1.7",
   "websiteUrl": "https://rofilter.cn",
   "repository": {
     "url": "https://github.com/szhuangzan/rofilter-mcp",

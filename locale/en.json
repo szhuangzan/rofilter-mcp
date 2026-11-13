@@ -1,6 +1,6 @@
 {
   "meta": {
     "title": "ROFilter MCP",
-    "description": "Connects the hosted ROFilter reverse-osmosis design server (rofilter.cn): membrane library, feed-water analysis, and full system design calculations."
+    "description": "Connects the hosted ROFilter reverse-osmosis design server (rofilter.cn) with a 742-element library across 8 brands (Veolia, DuPont, Toray, LG, Hydranautics, CSM, Vontron, Ovay), feed-water analysis, scaling assessment, and full multi-stage system design calculations."
   }
 }

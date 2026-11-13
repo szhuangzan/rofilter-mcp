@@ -30,8 +30,8 @@
         "zh": "ROFilter 反渗透膜系统设计软件"
       },
       "description": {
-        "en": "Reverse osmosis membrane system design: element library, feed-water analysis, feed pressure, permeate TDS, energy and per-stage flux.",
-        "zh": "反渗透膜系统设计：膜元件库、进水水质分析、进水压力、产水 TDS、能耗与逐段通量。"
+        "en": "Reverse-osmosis membrane system design with a 742-element library across 8 brands (Veolia, DuPont, Toray, LG, Hydranautics, CSM, Vontron, Ovay), feed-water analysis, scaling assessment, and full multi-stage design (feed pressure, permeate TDS, energy, per-stage flux).",
+        "zh": "反渗透膜系统设计：742 件膜元件库（威立雅、杜邦、东丽、LG、海德能、CSM、沃顿、澳维 8 大品牌）、进水水质分析、结垢评估与完整多段设计（进水压力、产水 TDS、能耗、逐段通量）。"
       },
       "author": "rofilter.cn",
       "homepage": "https://rofilter.cn",
@@ -56,7 +56,7 @@
       },
       "versions": [
         {
-          "version": "2.1.6",
+          "version": "2.1.7",
           "publishTimestamp": 1794001945,
           "source": {
             "type": "git",
