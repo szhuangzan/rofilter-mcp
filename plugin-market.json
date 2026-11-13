@@ -61,7 +61,7 @@
           "source": {
             "type": "git",
             "url": "https://github.com/szhuangzan/rofilter-mcp.git",
-            "commit": "9255dd955b6724533c61b2072b64c15013515379"
+            "commit": "ce9a6c1c030f087c55eb5e41152819912028b62a"
           }
         }
       ]
